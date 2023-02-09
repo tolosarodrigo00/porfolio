@@ -1,2 +1,2 @@
 # porfolio
-Pagina personal
+Pagina principal de mi POrfolio
