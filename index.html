@@ -1,277 +1,599 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">    
-    <link rel="stylesheet" href="css/main.css">
-    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/9817cf6728.js" crossorigin="anonymous"></script>
-    <link rel="icon" type="image/x-icon" href="img/code-solid.ico">
-    <title>Lic. Tolosa Rodrigo { Porfolio }</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rodrigo Tolosa — Senior Python Developer & AWS Engineer</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:        #08090e;
+      --surface:   #0f1017;
+      --surface2:  #14151e;
+      --border:    rgba(255,255,255,0.07);
+      --accent:    #f59e0b;
+      --accent2:   #3b82f6;
+      --accent3:   #10b981;
+      --text:      #eaeaf2;
+      --muted:     #6b6b8a;
+      --font-head: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --radius:    14px;
+      --ease:      cubic-bezier(0.4,0,0.2,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(245,158,11,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,158,11,0.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+    /* NAVBAR */
+    .navbar {
+      background: rgba(8,9,14,0.88);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .navbar-brand {
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text) !important;
+    }
+    .navbar-brand .dot { color: var(--accent); }
+    .nav-link {
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted) !important;
+      transition: color 0.3s var(--ease);
+      padding: 0.5rem 1rem !important;
+    }
+    .nav-link:hover { color: var(--text) !important; }
+    .nav-cta {
+      background: var(--accent) !important;
+      color: #000 !important;
+      border-radius: 50px;
+      padding: 0.45rem 1.2rem !important;
+      font-weight: 500;
+      transition: 0.3s var(--ease);
+    }
+    .nav-cta:hover { background: #e08d00 !important; transform: translateY(-1px); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 5rem;
+    }
+    #hero::after {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,158,11,0.09) 0%, transparent 65%);
+      top: -200px; right: -200px;
+      pointer-events: none;
+    }
+    .hero-glow-left {
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.07) 0%, transparent 65%);
+      bottom: -100px; left: -100px;
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.4rem;
+    }
+    .eyebrow-line { display:inline-block; width:24px; height:1px; background:var(--accent); }
+
+    .hero-name {
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: clamp(2.8rem, 7.5vw, 6rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin-bottom: 0.5rem;
+    }
+    .hero-role {
+      font-family: var(--font-head);
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .hero-role .pill {
+      display: inline-block;
+      background: rgba(245,158,11,0.1);
+      border: 1px solid rgba(245,158,11,0.25);
+      color: var(--accent);
+      border-radius: 50px;
+      padding: 0.15rem 0.8rem;
+      font-size: 0.82em;
+      margin-left: 0.4rem;
+      font-weight: 500;
+    }
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.85;
+      margin-bottom: 2rem;
+    }
+
+    .cert-badges { display:flex; flex-wrap:wrap; gap:.7rem; margin-bottom:2.5rem; }
+    .cert-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: rgba(16,185,129,0.07);
+      border: 1px solid rgba(16,185,129,0.2);
+      border-radius: 8px;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.78rem;
+      color: var(--accent3);
+      font-weight: 500;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+      align-items: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .btn-aws {
+      background: var(--accent); color: #000; border: none;
+      padding: 0.7rem 1.8rem; border-radius: 50px;
+      font-family: var(--font-body); font-weight: 500; font-size: 0.9rem;
+      text-decoration: none; transition: 0.3s var(--ease);
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-aws:hover { background:#e08d00; color:#000; transform:translateY(-2px); box-shadow:0 10px 28px rgba(245,158,11,.3); }
+
+    .btn-outline-rt {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border); padding: 0.7rem 1.8rem;
+      border-radius: 50px; font-family: var(--font-body); font-size: 0.9rem;
+      text-decoration: none; transition: 0.3s var(--ease);
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-outline-rt:hover { border-color:var(--accent); color:var(--accent); transform:translateY(-2px); }
+
+    .social-link {
+      width:40px; height:40px; border:1px solid var(--border); border-radius:50%;
+      display:inline-flex; align-items:center; justify-content:center;
+      color:var(--muted); text-decoration:none; font-size:.9rem; transition:.3s var(--ease);
+    }
+    .social-link:hover { border-color:var(--accent); color:var(--accent); transform:translateY(-3px); }
+
+    /* SECTION */
+    .s-label {
+      font-size:.75rem; letter-spacing:.16em; text-transform:uppercase;
+      color:var(--accent); display:flex; align-items:center; gap:.55rem; margin-bottom:.6rem;
+    }
+    .s-label::before { content:''; width:18px; height:1px; background:var(--accent); }
+    .s-title {
+      font-family:var(--font-head); font-weight:800;
+      font-size:clamp(1.8rem,4vw,2.8rem); letter-spacing:-.03em; line-height:1.1; margin-bottom:.8rem;
+    }
+    .s-sub { color:var(--muted); font-size:.95rem; max-width:460px; line-height:1.8; }
+
+    section { padding:7rem 0; position:relative; z-index:1; }
+    .divider { height:1px; background:linear-gradient(to right,transparent,var(--border),transparent); }
+
+    /* SKILLS */
+    .aws-group-title {
+      font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+      color:var(--muted); margin-bottom:.75rem; margin-top:1.8rem;
+    }
+    .aws-group-title:first-child { margin-top:0; }
+    .chips-row { display:flex; flex-wrap:wrap; gap:.5rem; }
+    .chip {
+      display:inline-flex; align-items:center; gap:.4rem;
+      background:var(--surface2); border:1px solid var(--border);
+      border-radius:8px; padding:.4rem .9rem; font-size:.82rem; color:var(--text);
+      transition:.28s var(--ease);
+    }
+    .chip i { color:var(--accent); font-size:.75rem; }
+    .chip:hover { border-color:var(--accent); color:var(--accent); transform:translateY(-2px); }
+    .chip.blue i { color:var(--accent2); }
+    .chip.blue:hover { border-color:var(--accent2); color:var(--accent2); }
+    .chip.green i { color:var(--accent3); }
+    .chip.green:hover { border-color:var(--accent3); color:var(--accent3); }
+
+    /* TIMELINE */
+    .timeline { position:relative; padding-left:1.75rem; }
+    .timeline::before {
+      content:''; position:absolute; left:0; top:14px; bottom:14px;
+      width:1px; background:linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+    }
+    .t-card {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:var(--radius); padding:2rem 2.2rem; margin-bottom:1.25rem;
+      position:relative; transition:.35s var(--ease);
+    }
+    .t-card::before {
+      content:''; position:absolute; left:-2.2rem; top:1.85rem;
+      width:8px; height:8px; border-radius:50%;
+      background:var(--accent); box-shadow:0 0 0 4px rgba(245,158,11,.15);
+    }
+    .t-card:hover { border-color:rgba(245,158,11,.25); transform:translateX(5px); }
+    .t-company { font-family:var(--font-head); font-weight:700; font-size:1.05rem; color:var(--text); }
+    .t-role { color:var(--accent); font-size:.86rem; font-weight:500; margin:.15rem 0; }
+    .t-period { color:var(--muted); font-size:.78rem; margin-bottom:1.1rem; }
+    .t-list { list-style:none; padding:0; margin:0 0 1.2rem; }
+    .t-list li {
+      font-size:.88rem; color:var(--muted); padding:.3rem 0 .3rem 1.1rem;
+      position:relative; line-height:1.6;
+    }
+    .t-list li::before { content:'→'; position:absolute; left:0; color:var(--accent); font-size:.75rem; }
+    .t-tags { display:flex; flex-wrap:wrap; gap:.45rem; }
+    .t-tag {
+      background:rgba(245,158,11,.07); border:1px solid rgba(245,158,11,.15);
+      color:var(--accent); font-size:.72rem; padding:.18rem .65rem; border-radius:50px;
+    }
+    .t-tag.blue { background:rgba(59,130,246,.07); border-color:rgba(59,130,246,.15); color:var(--accent2); }
+
+    /* EDUCATION */
+    .edu-row { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1rem; }
+    .edu-card {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:var(--radius); padding:1.5rem;
+      display:flex; align-items:flex-start; gap:1rem; transition:.3s var(--ease);
+    }
+    .edu-card:hover { border-color:rgba(16,185,129,.3); transform:translateY(-3px); }
+    .edu-icon {
+      width:46px; height:46px; border-radius:10px; flex-shrink:0;
+      background:rgba(16,185,129,.08); border:1px solid rgba(16,185,129,.2);
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.1rem; color:var(--accent3);
+    }
+    .edu-icon.aws-icon { background:rgba(245,158,11,.08); border-color:rgba(245,158,11,.2); color:var(--accent); }
+    .edu-title { font-family:var(--font-head); font-size:.88rem; font-weight:600; color:var(--text); line-height:1.4; margin-bottom:.2rem; }
+    .edu-meta { font-size:.76rem; color:var(--muted); }
+    .valid-badge {
+      display:inline-flex; align-items:center; gap:.3rem;
+      background:rgba(16,185,129,.08); border:1px solid rgba(16,185,129,.2);
+      color:var(--accent3); font-size:.7rem; padding:.12rem .55rem;
+      border-radius:50px; margin-top:.35rem;
+    }
+    .valid-dot { width:5px; height:5px; background:var(--accent3); border-radius:50%; animation:pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+
+    footer { border-top:1px solid var(--border); padding:2.5rem 0; }
+    .footer-copy { font-size:.8rem; color:var(--muted); }
+
+    .fade-up {
+      opacity:0; transform:translateY(24px);
+      transition:opacity .65s var(--ease), transform .65s var(--ease);
+    }
+    .fade-up.visible { opacity:1; transform:translateY(0); }
+
+    @media(max-width:767px) {
+      .hero-actions { justify-content:center; }
+      .cert-badges { justify-content:center; }
+    }
+  </style>
 </head>
 <body>
-    <div id ='HOME' class="container">   
-         <!-- position-fixed -->     
-    <header class="d-flex justify-content-end pt-4 pb-5 mb-5">     
-         <ul class="nav navbar-brand  pt-4 ">
-                <li class="nav-item"><a href="#HOME" class="nav-link h5 text-body nava">Inicio</a></li>                                
-                <li class="nav-item"><a href="#EXP" class="nav-link h5 text-body nava">Experiencia</a></li>
-                <li class="nav-item"><a href="#EDUCACION" class="nav-link h5 text-body nava">Educación</a></li>
-         </ul>             
-    </header>         
-    <section class="row justify-content-center pt-5 mb-5 mt-5 ">
-            <div class="col-8 align-content-center" >
-                <h4 class="display-6" >Hola 👋! Soy </h4>  
-                <h1 class="display-1 text-primary"> <strong>Tolosa Rodrigo</strong></h1>        
-                <h4 class="display-6 "> <strong>Desarrollador de Software</strong> </h4>
-                <ul class="nav nav-pills gap-3">
-                    <li class="nav-item "><a href="https://www.linkedin.com/in/rodrigo-n-tolosa/" target="_blank" class="fab fa-linkedin-in fa-3x text-decoration-none text-secondary nava"></a></li>
-                    <li class="nav-item "><a href="https://github.com/tolosarodrigo00" target="_blank" class="fab fa-github fa-3x text-decoration-none text-secondary nava"></a></li>                                                              
-                    <li class="nav-item "><a href="" target="_blank" class="fa-regular fa-file-pdf fa-3x text-decoration-none text-secondary nava "></a></li>                       
-               </ul>
-            </div>             
-         </section>        
-        <section id="HABILIDADES" class="row align-items-center pt-5 pb-3"> 
-             <div class="col text-center ">                
-                <div class="row justify-content-evenly pt-5 pb-5 gap-3">
-                    <div class="col-12 col-md-4 col-lg-2">
-                        <a class="fa-brands fa-html5 fa-5x text-decoration-none text-primary" style="color: #333333;"></a>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-2">
-                        <a  class="fa-brands fa-css3-alt fa-5x text-decoration-none text-primary" style="color: #333333;"></a>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-2">
-                        <a  class="fa-brands fa-bootstrap  fa-5x text-decoration-none text-primary" style="color: #333333;"></a>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-2">
-                        <a  class="fa-brands fa-aws  fa-5x text-decoration-none text-primary" style="color: #333333;"></a>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-2">
-                        <a  class="fa-brands fa-java  fa-5x text-decoration-none text-primary" style="color: #333333;"></a>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-2">
-                        <a  class="fa-brands fa-python fa-5x text-decoration-none text-primary" style="color: #333333;"></a>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-2">
-                        <a  class="fab fa-github fa-2x fa-5x text-decoration-none text-primary" style="color: #333333;"></a>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-2">
-                        <a  class="fa-brands fa-git-alt fa-5x text-decoration-none text-primary" style="color: #333333;"></a>
-                    </div>   
-                    
-                </div>
-             </div>             
-        </section>
-        <section id="EXP" class="row align-items-center pt-1 pb-3">
-            <div class="col-12 text-center">
-                <div class="row justify-content-evenly pt-5 pb-5 gap-2 ">
-                    <div class="col-12 text-center pt-1 pb-5 mb-5 ">
-                        <h2 class="display-2">Experiencia</h2>
-                    </div>
-                    <div class="col-12 col-md-4 card border-0 bg-transparent pb-5">                        
-                            <img src="./img/descarga.png" class="card-img-top w-100 " alt="...">
-                            <div class="card-body bg-transparent">
-                              <h5 class="card-title">DXC Technology</h5>
-                              <h6 class="card-subtitle mb-2 text-muted">(2014 - Actual)</h6>
-                              <h6 class="card-subtitle mb-2 text-muted">Senior Software Developer</h6>
-                              <ul class="list-group list-group-flush">                                
-                                <li class="list-group-item bg-transparent">Programacion PL-SQL</li>
-                                <li class="list-group-item bg-transparent">Optimización</li>                                
-                                <li class="list-group-item bg-transparent">Análisis de requerimientos</li>                                
-                                <li class="list-group-item bg-transparent">Base de datos Oracle</li>                            
-                                <li class="list-group-item bg-transparent">AWS</li>                            
-                              </ul>
-                            </div>                          
-                    </div>
-                    <div class="col-12 col-md-4 card border-0 bg-transparent pb-5">                            
-                        <img src="./img/hms.png" class="card-img-top w-100" alt="...">
-                        <div class="card-body bg-transparent">
-                          <h5 class="card-title">Health Management Solutions</h5>
-                          <h6 class="card-subtitle mb-2 text-muted">(2014 - 2022)</h6>
-                          <h6 class="card-subtitle mb-2 text-muted">Senior Oracle Developer</h6>
-                          <ul class="list-group list-group-flush bg-transparent ">
-                            <li class="list-group-item bg-transparent">Desarrollo en Oracle Forms</li>
-                            <li class="list-group-item bg-transparent">Programacion PL-SQL</li>
-                            <li class="list-group-item bg-transparent">Optimización</li>                         
-                            <li class="list-group-item bg-transparent">Base de datos Oracle</li>                            
-                          </ul>
-                        </div>                          
-                </div>
-                <div class="col-12 col-md-4 card  border-0 bg-transparent pb-5">                            
-                    <img src="./img/uni.png" class="card-img-top w-100 bg-transparent" alt="...">
-                    <div class="card-body bg-transparent">
-                      <h5 class="card-title">Univerdad Nacional de la Patagonia San Juan Bosco</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">Profesor Talleres UPAMI</h6>
-                      <p class="card-text">Dictado de los cursos de nivel inicial y avanzado de UPAMI .</p>
-                    </div>                          
-            </div>
-                </div>                               
-            </div>
-       </section>
-        <section id="EDUCACION" class="row justify-content-center pt-5  pb-5"> 
-            <div class="col-12 align-items-center">                
-                <div class="row justify-content-evenly pt-5 pb-5 gap-2 ">
-                    <div class="col-12 text-center pb-5 mb-5">
-                        <h2 class=" display-2 text-center">Educación</h2>
-                    </div>
-                    <div class="card mb-3 border-0 bg-transparent" style="max-width: 540px;">
-                        <div class="row g-0">
-                          <div class="col-md-4 text-center">
-                            <img src="./img/uni.png" class="img-fluid rounded-start" alt="...">
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body text-center">
-                              <h5 class="card-title">Licenciatura en Informatica</h5>
-                              <p class="card-text">2010-2017</p>
-                              <p class="card-text"><small class="text-muted">Puerto Madryn, Chubut</small></p>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="card mb-3  border-0 bg-transparent " style="max-width: 540px;">
-                        <div class="row g-0">
-                          <div class="col-md-4 text-center">
-                            <img src="./img/uni.png" class="img-fluid rounded-start" alt="...">
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body text-center">
-                              <h5 class="card-title">Analista Programador Universitario</h5>
-                              <p class="card-text">2010-2015</p>
-                              <p class="card-text"><small class="text-muted">Puerto Madryn, Chubut</small></p>
-                            </div>
-                          </div>
-                        </div>
-                    </div>                    
-                </div>            
-            </div>
-        </section>        
-        <section id="CURSO" class="row justify-content-center pt-5  pb-5"> 
-            <div class="col-12 align-items-center">                
-                <div class="row justify-content-evenly pt-5 pb-5 gap-2 ">
-                    <div class="col-12 text-center pb-5 mb-5">
-                        <h2 class=" display-2 text-center">Cursos y Certificaciones</h2>
-                    </div>                 
-                    <div class="card mb-3  border-0 bg-transparent" style="max-width: 540px;">
-                        <div class="row g-0">
-                          <div class="col-md-4 text-center">
-                            <a  class="img-fluid rounded-start fa-brands fa-aws  fa-5x text-decoration-none " style="color: #333333;"></a>
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body text-center">
-                              <h5 class="card-title">AWS Partner: Accreditation (Business)</h5>
-                              <p class="card-text">2022</p>                              
-                            </div>
-                          </div>
-                        </div>
-                    </div>  
-                    <div class="card mb-3  border-0 bg-transparent" style="max-width: 540px;">
-                        <div class="row g-0">
-                          <div class="col-md-4 text-center">
-                            <a  class="img-fluid rounded-start fa-brands fa-aws  fa-5x text-decoration-none " style="color: #333333;"></a>
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body text-center">
-                              <h5 class="card-title">AWS Partner: Accreditation (Technical)</h5>
-                              <p class="card-text">2022</p>                              
-                            </div>
-                          </div>
-                        </div>
-                    </div>    
-                    <div class="card mb-3  border-0 bg-transparent " style="max-width: 540px;">
-                        <div class="row g-0">
-                          <div class="col-md-4 text-center">
-                            <a  class="img-fluid rounded-start fa-brands fa-aws  fa-5x text-decoration-none " style="color: #333333;"></a>
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body text-center">
-                              <h5 class="card-title">AWS Partner: Cloud Economics Accreditation</h5>
-                              <p class="card-text">2022</p>                              
-                            </div>
-                          </div>
-                        </div>
-                    </div>    
-                    <div class="card mb-3  border-0 bg-transparent" style="max-width: 540px;">
-                        <div class="row g-0">
-                          <div class="col-md-4 text-center">                           
-                            <a  class="img-fluid rounded-start fa-brands fa-aws  fa-5x text-decoration-none " style="color: #333333;"></a>
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body text-center">
-                              <h5 class="card-title">AWS Partner: Sales Accreditation (Business)</h5>
-                              <p class="card-text">2022</p>                              
-                            </div>
-                          </div>
-                        </div>
-                    </div>  
-                    <div class="card mb-3  border-0 bg-transparent" style="max-width: 540px;">
-                        <div class="row g-0">
-                          <div class="col-md-4 text-center">
-                            <img src="./img/proidesa.png" class="img-fluid rounded-start" alt="...">
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body text-center">
-                              <h5 class="card-title">CCNA 3 (Cisco Certified Network Associate)</h5>
-                              <p class="card-text">2018</p>                              
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="card mb-3  border-0 bg-transparent " style="max-width: 540px;">
-                        <div class="row g-0">
-                          <div class="col-md-4 text-center">
-                            <img src="./img/proidesa.png" class="img-fluid rounded-start" alt="...">
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body text-center">
-                              <h5 class="card-title">CCNA 2 (Cisco Certified Network Associate)</h5>
-                              <p class="card-text">2018</p>                              
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="card mb-3  border-0 bg-transparent " style="max-width: 540px;">
-                        <div class="row g-0">
-                          <div class="col-md-4 text-center">
-                            <img src="./img/proidesa.png" class="img-fluid rounded-start" alt="...">
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body text-center">
-                              <h5 class="card-title">CCNA 1 (Cisco Certified Network Associate)</h5>
-                              <p class="card-text">2018</p>                              
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="card mb-3  border-0 bg-transparent " style="max-width: 540px;">
-                        <div class="row g-0">
-                          <div class="col-md-4 text-center">
-                            <img src="./img/utn.jpg" class="img-fluid rounded-start" alt="...">
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body text-center">
-                              <h5 class="card-title">Introducción a ISO 9001:2015</h5>
-                              <p class="card-text">2018</p>                              
-                            </div>
-                          </div>
-                        </div>
-                    </div>                                 
-                </div>            
-            </div>
-        </section>      
-    <footer class="row  align-items-center pb-3 pt-5">
-        <div class="col-12 col-md-6 ">
-            <ul class="nav nav-pills gap-3 justify-content-center">
-                <li class="nav-item" ><a href="https://www.linkedin.com/in/rodrigo-n-tolosa/" target="_blank" class="fab fa-linkedin-in fa-2x text-decoration-none text-secondary nava" style="color: #0082ca;"></a></li>
-                <li class="nav-item"><a href="https://github.com/tolosarodrigo00" target="_blank" class="fab fa-github fa-2x text-decoration-none text-secondary nava" style="color: #333333;"></a></li>                  
-         </ul> 
+
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#hero">Rodrigo Tolosa<span class="dot">.</span></a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <i class="fa-solid fa-bars" style="color:var(--text);font-size:.95rem;"></i>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+      <ul class="navbar-nav align-items-center gap-1">
+        <li class="nav-item"><a class="nav-link" href="#skills">Stack</a></li>
+        <li class="nav-item"><a class="nav-link" href="#experience">Experiencia</a></li>
+        <li class="nav-item"><a class="nav-link" href="#education">Educación</a></li>
+        <li class="nav-item ms-2">
+          <a href="mailto:tolosarodrigo00@gmail.com" class="nav-link nav-cta">
+            Contacto <i class="fa-solid fa-arrow-up-right ms-1" style="font-size:.75rem;"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-glow-left"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="row align-items-center">
+      <div class="col-lg-8 col-xl-7">
+
+        <div class="eyebrow">
+          <span class="eyebrow-line"></span>
+          Senior Python Developer · AWS Engineer
         </div>
-        <div class="col-12 col-md-6 text-center" >
-            <h6> &copy; 2023 Todos los derechos reservados. Lic. Tolosa Rodrigo </h6>
+
+        <h1 class="hero-name">Rodrigo<br>Tolosa</h1>
+
+        <p class="hero-role">
+          Cloud Solutions
+          <span class="pill"><i class="fa-brands fa-aws me-1"></i>AWS Certified</span>
+        </p>
+
+        <p class="hero-desc">
+          Desarrollador con foco en arquitecturas cloud-native sobre AWS. Diseño e implemento aplicaciones Python escalables usando Lambda, DynamoDB, S3 y herramientas de CI/CD. Trabajo en equipos distribuidos globalmente, entregando soluciones de alta disponibilidad y rendimiento.
+        </p>
+
+        <div class="cert-badges">
+          <span class="cert-badge">
+            <i class="fa-solid fa-shield-check"></i>
+            AWS Solutions Architect – Associate &nbsp;·&nbsp; 2024–2027
+          </span>
+          <span class="cert-badge">
+            <i class="fa-solid fa-shield-check"></i>
+            AWS Developer – Associate &nbsp;·&nbsp; 2024–2027
+          </span>
         </div>
-        
-    </footer>
-   </div>   
+
+        <div class="hero-actions">
+          <a href="https://www.linkedin.com/in/rodrigo-n-tolosa/" target="_blank" class="btn-aws">
+            <i class="fa-brands fa-linkedin-in"></i> LinkedIn
+          </a>
+          <a href="https://github.com/tolosarodrigo00" target="_blank" class="btn-outline-rt">
+            <i class="fa-brands fa-github"></i> GitHub
+          </a>
+          <a href="mailto:tolosarodrigo00@gmail.com" class="social-link ms-1" title="Email">
+            <i class="fa-regular fa-envelope"></i>
+          </a>
+          <a href="#" class="social-link" title="CV PDF">
+            <i class="fa-regular fa-file-pdf"></i>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="skills">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-5 mb-lg-0 fade-up">
+        <div class="s-label">Stack tecnológico</div>
+        <h2 class="s-title">Habilidades</h2>
+        <p class="s-sub">Tecnologías cloud-native, lenguajes y herramientas que uso en proyectos reales de producción.</p>
+      </div>
+      <div class="col-lg-8 fade-up" style="transition-delay:.12s">
+        <p class="aws-group-title">AWS — Cloud Services</p>
+        <div class="chips-row">
+          <span class="chip"><i class="fa-brands fa-aws"></i> Lambda</span>
+          <span class="chip"><i class="fa-brands fa-aws"></i> DynamoDB</span>
+          <span class="chip"><i class="fa-brands fa-aws"></i> S3</span>
+          <span class="chip"><i class="fa-brands fa-aws"></i> EC2</span>
+          <span class="chip"><i class="fa-brands fa-aws"></i> CloudFormation</span>
+          <span class="chip"><i class="fa-brands fa-aws"></i> API Gateway</span>
+          <span class="chip"><i class="fa-brands fa-aws"></i> IAM</span>
+        </div>
+
+        <p class="aws-group-title">Lenguajes & Frameworks</p>
+        <div class="chips-row">
+          <span class="chip blue"><i class="fa-brands fa-python"></i> Python</span>
+          <span class="chip blue"><i class="fa-solid fa-database"></i> PL/SQL</span>
+          <span class="chip blue"><i class="fa-solid fa-code"></i> RESTful APIs</span>
+          <span class="chip blue"><i class="fa-brands fa-java"></i> Java</span>
+        </div>
+
+        <p class="aws-group-title">Bases de datos</p>
+        <div class="chips-row">
+          <span class="chip"><i class="fa-solid fa-database"></i> PostgreSQL</span>
+          <span class="chip"><i class="fa-solid fa-database"></i> MySQL</span>
+          <span class="chip"><i class="fa-solid fa-database"></i> Oracle DB</span>
+          <span class="chip"><i class="fa-brands fa-aws"></i> DynamoDB (NoSQL)</span>
+        </div>
+
+        <p class="aws-group-title">DevOps & Herramientas</p>
+        <div class="chips-row">
+          <span class="chip green"><i class="fa-brands fa-docker"></i> Docker</span>
+          <span class="chip green"><i class="fa-brands fa-git-alt"></i> Git</span>
+          <span class="chip green"><i class="fa-brands fa-github"></i> GitHub</span>
+          <span class="chip green"><i class="fa-solid fa-gears"></i> CI/CD</span>
+          <span class="chip green"><i class="fa-solid fa-layer-group"></i> Serverless</span>
+          <span class="chip green"><i class="fa-solid fa-arrows-spin"></i> Scrum</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="experience">
+  <div class="container">
+    <div class="row mb-5 fade-up">
+      <div class="col">
+        <div class="s-label">Trayectoria</div>
+        <h2 class="s-title">Experiencia</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-9 col-xl-8">
+        <div class="timeline">
+
+          <div class="t-card fade-up">
+            <p class="t-company">DXC Technology</p>
+            <p class="t-role">Sr. Python Developer · Cloud Solutions</p>
+            <p class="t-period"><i class="fa-regular fa-calendar me-1"></i>Feb 2022 — Actualidad &nbsp;·&nbsp; Remoto</p>
+            <ul class="t-list">
+              <li>Diseño, desarrollo y testing de aplicaciones Python robustas y escalables en producción.</li>
+              <li>Implementación de arquitecturas serverless con Lambda, DynamoDB y S3.</li>
+              <li>Optimización continua de rendimiento y costos de aplicaciones en AWS.</li>
+              <li>Colaboración con arquitectos para diseñar soluciones cloud-native innovadoras.</li>
+              <li>Implementación de APIs RESTful y automatización de despliegues con CloudFormation.</li>
+              <li>Uso de Docker, CI/CD, Git y Scrum en equipos distribuidos globalmente.</li>
+            </ul>
+            <div class="t-tags">
+              <span class="t-tag">Python</span>
+              <span class="t-tag">AWS Lambda</span>
+              <span class="t-tag">DynamoDB</span>
+              <span class="t-tag">S3</span>
+              <span class="t-tag">EC2</span>
+              <span class="t-tag">CloudFormation</span>
+              <span class="t-tag blue">Docker</span>
+              <span class="t-tag blue">CI/CD</span>
+              <span class="t-tag blue">Scrum</span>
+            </div>
+          </div>
+
+          <div class="t-card fade-up" style="transition-delay:.1s">
+            <p class="t-company">Health Management Solutions</p>
+            <p class="t-role">Sr. Oracle Developer</p>
+            <p class="t-period"><i class="fa-regular fa-calendar me-1"></i>Abr 2014 — Feb 2022 &nbsp;·&nbsp; Puerto Madryn, Chubut</p>
+            <ul class="t-list">
+              <li>Desarrollo de aplicaciones robustas con Oracle Forms y PL/SQL.</li>
+              <li>Optimización de bases de datos Oracle mediante estrategias de tuning avanzado.</li>
+              <li>Diseño y desarrollo de reportes personalizados con Oracle Reports.</li>
+            </ul>
+            <div class="t-tags">
+              <span class="t-tag">PL/SQL</span>
+              <span class="t-tag">Oracle Forms</span>
+              <span class="t-tag">Oracle DB</span>
+              <span class="t-tag">Oracle Reports</span>
+              <span class="t-tag blue">DB Tuning</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="education">
+  <div class="container">
+    <div class="row mb-5 fade-up">
+      <div class="col">
+        <div class="s-label">Formación</div>
+        <h2 class="s-title">Educación & Certificaciones</h2>
+      </div>
+    </div>
+    <div class="edu-row fade-up">
+
+      <div class="edu-card">
+        <div class="edu-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+        <div>
+          <p class="edu-title">Licenciado en Informática</p>
+          <p class="edu-meta">UNPSJB · Puerto Madryn · 2010–2017</p>
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-icon"><i class="fa-solid fa-laptop-code"></i></div>
+        <div>
+          <p class="edu-title">Analista Programador Universitario</p>
+          <p class="edu-meta">UNPSJB · Puerto Madryn · 2010–2015</p>
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-icon aws-icon"><i class="fa-brands fa-aws"></i></div>
+        <div>
+          <p class="edu-title">AWS Certified Solutions Architect – Associate</p>
+          <p class="edu-meta">Amazon Web Services</p>
+          <span class="valid-badge"><span class="valid-dot"></span> Vigente 2024–2027</span>
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-icon aws-icon"><i class="fa-brands fa-aws"></i></div>
+        <div>
+          <p class="edu-title">AWS Certified Developer – Associate</p>
+          <p class="edu-meta">Amazon Web Services</p>
+          <span class="valid-badge"><span class="valid-dot"></span> Vigente 2024–2027</span>
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-icon"><i class="fa-solid fa-award"></i></div>
+        <div>
+          <p class="edu-title">Introducción a ISO 9001:2015</p>
+          <p class="edu-meta">2018</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6 mb-3 mb-md-0">
+        <p class="footer-copy">© 2025 Rodrigo Tolosa · tolosarodrigo00@gmail.com · Puerto Madryn, Argentina</p>
+      </div>
+      <div class="col-md-6 d-flex justify-content-md-end gap-2">
+        <a href="https://www.linkedin.com/in/rodrigo-n-tolosa/" target="_blank" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://github.com/tolosarodrigo00" target="_blank" class="social-link"><i class="fa-brands fa-github"></i></a>
+        <a href="mailto:tolosarodrigo00@gmail.com" class="social-link"><i class="fa-regular fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-link:not(.nav-cta)');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => { if(window.scrollY >= s.offsetTop - 130) cur = s.id; });
+    links.forEach(l => { l.style.color = l.getAttribute('href') === '#' + cur ? 'var(--text)' : ''; });
+  });
+</script>
 </body>
 </html>
