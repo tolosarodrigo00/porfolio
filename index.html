@@ -4,31 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rodrigo Tolosa — Senior Python Developer & AWS Engineer</title>
+  <meta name="description" content="Senior Python Developer y AWS Certified Engineer. Arquitecturas cloud-native, serverless y SaaS desde Puerto Madryn, Argentina." />
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
 
   <style>
+    /* ── TOKENS ─────────────────────────────────────────── */
     :root {
-      --bg:        #08090e;
-      --surface:   #0f1017;
-      --surface2:  #14151e;
+      --bg:        #07080d;
+      --surface:   #0d0e16;
+      --surface2:  #12131c;
       --border:    rgba(255,255,255,0.07);
+      --border2:   rgba(255,255,255,0.12);
       --accent:    #f59e0b;
       --accent2:   #3b82f6;
       --accent3:   #10b981;
-      --text:      #eaeaf2;
-      --muted:     #6b6b8a;
+      --text:      #e8e8f0;
+      --text2:     #a8a8c0;
+      --muted:     #5a5a78;
       --font-head: 'Syne', sans-serif;
       --font-body: 'DM Sans', sans-serif;
-      --radius:    14px;
+      --radius:    12px;
+      --radius-lg: 20px;
       --ease:      cubic-bezier(0.4,0,0.2,1);
     }
 
+    /* ── RESET ──────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-
     body {
       background: var(--bg);
       color: var(--text);
@@ -38,13 +43,14 @@
       overflow-x: hidden;
     }
 
+    /* grid bg */
     body::before {
       content: '';
       position: fixed; inset: 0;
       background-image:
-        linear-gradient(rgba(245,158,11,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(245,158,11,0.025) 1px, transparent 1px);
-      background-size: 60px 60px;
+        linear-gradient(rgba(245,158,11,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,158,11,0.018) 1px, transparent 1px);
+      background-size: 72px 72px;
       pointer-events: none;
       z-index: 0;
     }
@@ -53,40 +59,42 @@
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
 
-    /* NAVBAR */
+    /* ── NAVBAR ─────────────────────────────────────────── */
     .navbar {
-      background: rgba(8,9,14,0.88);
-      backdrop-filter: blur(20px);
+      background: rgba(7,8,13,0.85);
+      backdrop-filter: blur(24px);
       border-bottom: 1px solid var(--border);
+      padding: .8rem 0;
     }
     .navbar-brand {
       font-family: var(--font-head);
       font-weight: 800;
-      font-size: 1rem;
-      letter-spacing: -0.01em;
+      font-size: .95rem;
+      letter-spacing: -.01em;
       color: var(--text) !important;
     }
     .navbar-brand .dot { color: var(--accent); }
     .nav-link {
-      font-size: 0.82rem;
-      letter-spacing: 0.06em;
+      font-size: .78rem;
+      letter-spacing: .08em;
       text-transform: uppercase;
       color: var(--muted) !important;
-      transition: color 0.3s var(--ease);
-      padding: 0.5rem 1rem !important;
+      transition: color .25s var(--ease);
+      padding: .45rem .9rem !important;
     }
-    .nav-link:hover { color: var(--text) !important; }
+    .nav-link:hover, .nav-link.active { color: var(--text) !important; }
     .nav-cta {
       background: var(--accent) !important;
       color: #000 !important;
       border-radius: 50px;
-      padding: 0.45rem 1.2rem !important;
-      font-weight: 500;
-      transition: 0.3s var(--ease);
+      padding: .42rem 1.1rem !important;
+      font-weight: 600;
+      font-size: .78rem;
+      transition: .25s var(--ease);
     }
-    .nav-cta:hover { background: #e08d00 !important; transform: translateY(-1px); }
+    .nav-cta:hover { background: #d48a00 !important; transform: translateY(-1px); }
 
-    /* HERO */
+    /* ── HERO ───────────────────────────────────────────── */
     #hero {
       min-height: 100vh;
       display: flex;
@@ -94,244 +102,456 @@
       position: relative;
       overflow: hidden;
       padding-top: 5rem;
+      padding-bottom: 5rem;
     }
-    #hero::after {
-      content: '';
+    .hero-glow {
       position: absolute;
-      width: 700px; height: 700px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(245,158,11,0.09) 0%, transparent 65%);
-      top: -200px; right: -200px;
       pointer-events: none;
     }
-    .hero-glow-left {
-      position: absolute;
+    .hero-glow-a {
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(245,158,11,0.07) 0%, transparent 65%);
+      top: -300px; right: -250px;
+    }
+    .hero-glow-b {
       width: 500px; height: 500px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.07) 0%, transparent 65%);
-      bottom: -100px; left: -100px;
-      pointer-events: none;
+      background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 65%);
+      bottom: -150px; left: -100px;
     }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
-      font-size: 0.78rem;
-      letter-spacing: 0.16em;
+      gap: .55rem;
+      font-size: .72rem;
+      letter-spacing: .18em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 1.4rem;
+      margin-bottom: 1.2rem;
     }
-    .eyebrow-line { display:inline-block; width:24px; height:1px; background:var(--accent); }
+    .eyebrow-line { display: inline-block; width: 20px; height: 1px; background: var(--accent); }
 
     .hero-name {
       font-family: var(--font-head);
       font-weight: 800;
-      font-size: clamp(2.8rem, 7.5vw, 6rem);
-      line-height: 1;
-      letter-spacing: -0.04em;
-      margin-bottom: 0.5rem;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: .95;
+      letter-spacing: -.045em;
+      margin-bottom: .7rem;
     }
+    .hero-name .line2 { color: var(--text2); }
+
     .hero-role {
-      font-family: var(--font-head);
-      font-size: clamp(1rem, 2.5vw, 1.5rem);
-      font-weight: 600;
-      color: var(--muted);
-      margin-bottom: 2rem;
+      font-size: clamp(.9rem, 2vw, 1.05rem);
+      color: var(--text2);
+      font-weight: 400;
+      margin-bottom: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      flex-wrap: wrap;
     }
-    .hero-role .pill {
-      display: inline-block;
-      background: rgba(245,158,11,0.1);
-      border: 1px solid rgba(245,158,11,0.25);
-      color: var(--accent);
-      border-radius: 50px;
-      padding: 0.15rem 0.8rem;
-      font-size: 0.82em;
-      margin-left: 0.4rem;
-      font-weight: 500;
-    }
+    .role-sep { width: 4px; height: 4px; border-radius: 50%; background: var(--muted); }
+
     .hero-desc {
-      font-size: 1rem;
-      color: var(--muted);
-      max-width: 520px;
-      line-height: 1.85;
+      font-size: .95rem;
+      color: var(--text2);
+      max-width: 480px;
+      line-height: 1.9;
       margin-bottom: 2rem;
     }
 
-    .cert-badges { display:flex; flex-wrap:wrap; gap:.7rem; margin-bottom:2.5rem; }
+    .cert-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-bottom: 2rem;
+    }
     .cert-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.45rem;
-      background: rgba(16,185,129,0.07);
-      border: 1px solid rgba(16,185,129,0.2);
+      gap: .4rem;
+      background: rgba(16,185,129,0.06);
+      border: 1px solid rgba(16,185,129,0.18);
       border-radius: 8px;
-      padding: 0.4rem 0.9rem;
-      font-size: 0.78rem;
+      padding: .35rem .85rem;
+      font-size: .74rem;
       color: var(--accent3);
       font-weight: 500;
     }
 
     .hero-actions {
       display: flex;
-      gap: 0.9rem;
+      gap: .8rem;
       flex-wrap: wrap;
       align-items: center;
-      padding-top: 2rem;
+      padding-top: 1.8rem;
       border-top: 1px solid var(--border);
     }
 
-    .btn-aws {
-      background: var(--accent); color: #000; border: none;
-      padding: 0.7rem 1.8rem; border-radius: 50px;
-      font-family: var(--font-body); font-weight: 500; font-size: 0.9rem;
-      text-decoration: none; transition: 0.3s var(--ease);
-      display: inline-flex; align-items: center; gap: 0.5rem;
+    /* profile card */
+    .profile-card {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      position: sticky;
+      top: 6rem;
     }
-    .btn-aws:hover { background:#e08d00; color:#000; transform:translateY(-2px); box-shadow:0 10px 28px rgba(245,158,11,.3); }
+    .avatar {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent) 0%, #d48a00 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 1.6rem;
+      color: #000;
+      margin-bottom: 1.2rem;
+      letter-spacing: -.04em;
+    }
+    .profile-name {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: .15rem;
+    }
+    .profile-title { font-size: .8rem; color: var(--text2); margin-bottom: 1.5rem; }
 
-    .btn-outline-rt {
-      background: transparent; color: var(--text);
-      border: 1px solid var(--border); padding: 0.7rem 1.8rem;
-      border-radius: 50px; font-family: var(--font-body); font-size: 0.9rem;
-      text-decoration: none; transition: 0.3s var(--ease);
-      display: inline-flex; align-items: center; gap: 0.5rem;
+    .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-bottom: 1.5rem; }
+    .stat-box {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: .9rem .8rem;
+      text-align: center;
     }
-    .btn-outline-rt:hover { border-color:var(--accent); color:var(--accent); transform:translateY(-2px); }
+    .stat-number {
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 1.6rem;
+      letter-spacing: -.04em;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label { font-size: .68rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-top: .25rem; }
+
+    .profile-location {
+      font-size: .78rem;
+      color: var(--text2);
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      margin-bottom: 1.2rem;
+    }
+    .profile-location i { color: var(--accent); font-size: .75rem; }
+
+    .profile-socials { display: flex; gap: .6rem; }
+
+    /* ── BUTTONS ────────────────────────────────────────── */
+    .btn-primary-rt {
+      background: var(--accent); color: #000; border: none;
+      padding: .7rem 1.6rem; border-radius: 50px;
+      font-family: var(--font-body); font-weight: 600; font-size: .88rem;
+      text-decoration: none; transition: .25s var(--ease);
+      display: inline-flex; align-items: center; gap: .45rem;
+    }
+    .btn-primary-rt:hover { background: #d48a00; color: #000; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,158,11,.28); }
+
+    .btn-ghost-rt {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border2); padding: .7rem 1.6rem;
+      border-radius: 50px; font-family: var(--font-body); font-size: .88rem;
+      text-decoration: none; transition: .25s var(--ease);
+      display: inline-flex; align-items: center; gap: .45rem;
+    }
+    .btn-ghost-rt:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
     .social-link {
-      width:40px; height:40px; border:1px solid var(--border); border-radius:50%;
-      display:inline-flex; align-items:center; justify-content:center;
-      color:var(--muted); text-decoration:none; font-size:.9rem; transition:.3s var(--ease);
+      width: 38px; height: 38px; border: 1px solid var(--border2); border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      color: var(--text2); text-decoration: none; font-size: .85rem; transition: .25s var(--ease);
     }
-    .social-link:hover { border-color:var(--accent); color:var(--accent); transform:translateY(-3px); }
+    .social-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
-    /* SECTION */
+    /* ── SECTIONS ───────────────────────────────────────── */
+    section { padding: 6rem 0; position: relative; z-index: 1; }
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border2) 30%, var(--border2) 70%, transparent);
+      margin: 0;
+    }
+
+    .section-header { margin-bottom: 3.5rem; }
+    .s-num {
+      font-family: var(--font-head);
+      font-size: .7rem;
+      letter-spacing: .2em;
+      color: var(--muted);
+      margin-bottom: .4rem;
+    }
     .s-label {
-      font-size:.75rem; letter-spacing:.16em; text-transform:uppercase;
-      color:var(--accent); display:flex; align-items:center; gap:.55rem; margin-bottom:.6rem;
+      font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--accent); display: flex; align-items: center; gap: .5rem; margin-bottom: .5rem;
     }
-    .s-label::before { content:''; width:18px; height:1px; background:var(--accent); }
+    .s-label::before { content: ''; width: 16px; height: 1px; background: var(--accent); }
     .s-title {
-      font-family:var(--font-head); font-weight:800;
-      font-size:clamp(1.8rem,4vw,2.8rem); letter-spacing:-.03em; line-height:1.1; margin-bottom:.8rem;
+      font-family: var(--font-head); font-weight: 800;
+      font-size: clamp(1.8rem,4vw,2.6rem); letter-spacing: -.035em; line-height: 1.1; margin-bottom: .7rem;
     }
-    .s-sub { color:var(--muted); font-size:.95rem; max-width:460px; line-height:1.8; }
+    .s-sub { color: var(--text2); font-size: .9rem; max-width: 440px; line-height: 1.8; }
 
-    section { padding:7rem 0; position:relative; z-index:1; }
-    .divider { height:1px; background:linear-gradient(to right,transparent,var(--border),transparent); }
-
-    /* SKILLS */
-    .aws-group-title {
-      font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
-      color:var(--muted); margin-bottom:.75rem; margin-top:1.8rem;
+    /* ── SKILLS ─────────────────────────────────────────── */
+    .skill-group-label {
+      font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: .65rem; margin-top: 1.6rem;
     }
-    .aws-group-title:first-child { margin-top:0; }
-    .chips-row { display:flex; flex-wrap:wrap; gap:.5rem; }
+    .skill-group-label:first-child { margin-top: 0; }
+    .chips-row { display: flex; flex-wrap: wrap; gap: .45rem; }
     .chip {
-      display:inline-flex; align-items:center; gap:.4rem;
-      background:var(--surface2); border:1px solid var(--border);
-      border-radius:8px; padding:.4rem .9rem; font-size:.82rem; color:var(--text);
-      transition:.28s var(--ease);
+      display: inline-flex; align-items: center; gap: .38rem;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; padding: .38rem .85rem; font-size: .8rem; color: var(--text2);
+      transition: .22s var(--ease); cursor: default;
     }
-    .chip i { color:var(--accent); font-size:.75rem; }
-    .chip:hover { border-color:var(--accent); color:var(--accent); transform:translateY(-2px); }
-    .chip.blue i { color:var(--accent2); }
-    .chip.blue:hover { border-color:var(--accent2); color:var(--accent2); }
-    .chip.green i { color:var(--accent3); }
-    .chip.green:hover { border-color:var(--accent3); color:var(--accent3); }
+    .chip i { font-size: .72rem; color: var(--accent); }
+    .chip:hover { border-color: rgba(245,158,11,.35); color: var(--text); transform: translateY(-2px); }
+    .chip.blue i { color: var(--accent2); }
+    .chip.blue:hover { border-color: rgba(59,130,246,.35); }
+    .chip.green i { color: var(--accent3); }
+    .chip.green:hover { border-color: rgba(16,185,129,.35); }
 
-    /* TIMELINE */
-    .timeline { position:relative; padding-left:1.75rem; }
+    /* ── TIMELINE ───────────────────────────────────────── */
+    .timeline { position: relative; padding-left: 2rem; }
     .timeline::before {
-      content:''; position:absolute; left:0; top:14px; bottom:14px;
-      width:1px; background:linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+      content: ''; position: absolute; left: 0; top: 16px; bottom: 16px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent) 0%, var(--accent2) 60%, transparent 100%);
     }
     .t-card {
-      background:var(--surface); border:1px solid var(--border);
-      border-radius:var(--radius); padding:2rem 2.2rem; margin-bottom:1.25rem;
-      position:relative; transition:.35s var(--ease);
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.8rem 2rem; margin-bottom: 1.2rem;
+      position: relative; transition: .3s var(--ease);
     }
     .t-card::before {
-      content:''; position:absolute; left:-2.2rem; top:1.85rem;
-      width:8px; height:8px; border-radius:50%;
-      background:var(--accent); box-shadow:0 0 0 4px rgba(245,158,11,.15);
+      content: ''; position: absolute; left: -2.4rem; top: 1.9rem;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--accent); box-shadow: 0 0 0 5px rgba(245,158,11,.12);
     }
-    .t-card:hover { border-color:rgba(245,158,11,.25); transform:translateX(5px); }
-    .t-company { font-family:var(--font-head); font-weight:700; font-size:1.05rem; color:var(--text); }
-    .t-role { color:var(--accent); font-size:.86rem; font-weight:500; margin:.15rem 0; }
-    .t-period { color:var(--muted); font-size:.78rem; margin-bottom:1.1rem; }
-    .t-list { list-style:none; padding:0; margin:0 0 1.2rem; }
+    .t-card:hover { border-color: rgba(245,158,11,.22); transform: translateX(4px); }
+
+    .t-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: .9rem; }
+    .t-company { font-family: var(--font-head); font-weight: 700; font-size: 1rem; color: var(--text); }
+    .t-role { color: var(--accent); font-size: .82rem; font-weight: 500; margin-top: .12rem; }
+    .t-period {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 50px; padding: .22rem .75rem;
+      font-size: .72rem; color: var(--text2); white-space: nowrap; flex-shrink: 0;
+    }
+    .t-list { list-style: none; padding: 0; margin: 0 0 1.1rem; }
     .t-list li {
-      font-size:.88rem; color:var(--muted); padding:.3rem 0 .3rem 1.1rem;
-      position:relative; line-height:1.6;
+      font-size: .85rem; color: var(--text2); padding: .28rem 0 .28rem 1.1rem;
+      position: relative; line-height: 1.65;
     }
-    .t-list li::before { content:'→'; position:absolute; left:0; color:var(--accent); font-size:.75rem; }
-    .t-tags { display:flex; flex-wrap:wrap; gap:.45rem; }
+    .t-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: .72rem; top: .35rem; }
+    .t-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
     .t-tag {
-      background:rgba(245,158,11,.07); border:1px solid rgba(245,158,11,.15);
-      color:var(--accent); font-size:.72rem; padding:.18rem .65rem; border-radius:50px;
+      background: rgba(245,158,11,.06); border: 1px solid rgba(245,158,11,.14);
+      color: var(--accent); font-size: .7rem; padding: .16rem .6rem; border-radius: 50px;
     }
-    .t-tag.blue { background:rgba(59,130,246,.07); border-color:rgba(59,130,246,.15); color:var(--accent2); }
+    .t-tag.blue { background: rgba(59,130,246,.06); border-color: rgba(59,130,246,.14); color: var(--accent2); }
 
-    /* EDUCATION */
-    .edu-row { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1rem; }
+    /* ── EDUCATION ──────────────────────────────────────── */
+    .edu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: .9rem; }
     .edu-card {
-      background:var(--surface); border:1px solid var(--border);
-      border-radius:var(--radius); padding:1.5rem;
-      display:flex; align-items:flex-start; gap:1rem; transition:.3s var(--ease);
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.4rem;
+      display: flex; align-items: flex-start; gap: .9rem; transition: .25s var(--ease);
     }
-    .edu-card:hover { border-color:rgba(16,185,129,.3); transform:translateY(-3px); }
+    .edu-card:hover { border-color: rgba(16,185,129,.25); transform: translateY(-3px); }
     .edu-icon {
-      width:46px; height:46px; border-radius:10px; flex-shrink:0;
-      background:rgba(16,185,129,.08); border:1px solid rgba(16,185,129,.2);
-      display:flex; align-items:center; justify-content:center;
-      font-size:1.1rem; color:var(--accent3);
+      width: 42px; height: 42px; border-radius: 10px; flex-shrink: 0;
+      background: rgba(16,185,129,.07); border: 1px solid rgba(16,185,129,.18);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: var(--accent3);
     }
-    .edu-icon.aws-icon { background:rgba(245,158,11,.08); border-color:rgba(245,158,11,.2); color:var(--accent); }
-    .edu-title { font-family:var(--font-head); font-size:.88rem; font-weight:600; color:var(--text); line-height:1.4; margin-bottom:.2rem; }
-    .edu-meta { font-size:.76rem; color:var(--muted); }
-    .valid-badge {
-      display:inline-flex; align-items:center; gap:.3rem;
-      background:rgba(16,185,129,.08); border:1px solid rgba(16,185,129,.2);
-      color:var(--accent3); font-size:.7rem; padding:.12rem .55rem;
-      border-radius:50px; margin-top:.35rem;
+    .edu-icon.aws { background: rgba(245,158,11,.07); border-color: rgba(245,158,11,.18); color: var(--accent); }
+    .edu-title { font-family: var(--font-head); font-size: .85rem; font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: .2rem; }
+    .edu-meta { font-size: .74rem; color: var(--muted); }
+    .badge-valid {
+      display: inline-flex; align-items: center; gap: .3rem;
+      background: rgba(16,185,129,.07); border: 1px solid rgba(16,185,129,.18);
+      color: var(--accent3); font-size: .68rem; padding: .12rem .55rem;
+      border-radius: 50px; margin-top: .35rem;
     }
-    .valid-dot { width:5px; height:5px; background:var(--accent3); border-radius:50%; animation:pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+    .valid-dot { width: 5px; height: 5px; background: var(--accent3); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
 
-    footer { border-top:1px solid var(--border); padding:2.5rem 0; }
-    .footer-copy { font-size:.8rem; color:var(--muted); }
+    /* ── PRODUCTS ───────────────────────────────────────── */
+    #products {
+      background: var(--surface);
+    }
+    #products::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 90% 20%, rgba(245,158,11,.05) 0%, transparent 55%),
+        radial-gradient(ellipse at 10% 80%, rgba(59,130,246,.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
 
+    .product-eyebrow {
+      display: inline-flex; align-items: center; gap: .55rem;
+      background: rgba(245,158,11,.07); border: 1px solid rgba(245,158,11,.18);
+      border-radius: 50px; padding: .3rem .9rem; font-size: .72rem;
+      color: var(--accent); font-weight: 500; margin-bottom: 1.2rem;
+    }
+    .live-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--accent3);
+      animation: pulse 2s infinite;
+    }
+
+    .product-headline {
+      font-family: var(--font-head); font-weight: 800;
+      font-size: clamp(2.2rem,5vw,3.8rem); letter-spacing: -.045em; line-height: .95;
+      margin-bottom: .8rem;
+    }
+    .product-headline .accent { color: var(--accent); }
+
+    .product-sub {
+      font-size: .95rem; color: var(--text2);
+      max-width: 500px; line-height: 1.9; margin-bottom: 2rem;
+    }
+
+    /* feature cards */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: .9rem;
+    }
+    .feature-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.4rem;
+      transition: .25s var(--ease);
+    }
+    .feature-card:hover { border-color: rgba(245,158,11,.25); transform: translateY(-3px); }
+    .feature-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .95rem; margin-bottom: .9rem;
+      background: rgba(245,158,11,.07); border: 1px solid rgba(245,158,11,.16); color: var(--accent);
+    }
+    .feature-icon.blue  { background: rgba(59,130,246,.07); border-color: rgba(59,130,246,.16); color: var(--accent2); }
+    .feature-icon.green { background: rgba(16,185,129,.07); border-color: rgba(16,185,129,.16); color: var(--accent3); }
+    .feature-title { font-family: var(--font-head); font-size: .85rem; font-weight: 700; margin-bottom: .3rem; }
+    .feature-text { font-size: .79rem; color: var(--text2); line-height: 1.65; }
+
+    /* pricing */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.1rem;
+    }
+    .price-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.8rem;
+      display: flex; flex-direction: column;
+      transition: .3s var(--ease); position: relative; overflow: hidden;
+    }
+    .price-card:hover { transform: translateY(-4px); border-color: var(--border2); }
+    .price-card.featured {
+      border-color: rgba(245,158,11,.35);
+      background: linear-gradient(145deg, rgba(245,158,11,.05) 0%, var(--bg) 55%);
+    }
+    .popular-badge {
+      position: absolute; top: 1.1rem; right: 1.1rem;
+      background: var(--accent); color: #000;
+      font-size: .62rem; font-weight: 700; letter-spacing: .08em;
+      padding: .18rem .65rem; border-radius: 50px; text-transform: uppercase;
+    }
+    .plan-tier { font-family: var(--font-head); font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: .7rem; }
+    .plan-amount { font-family: var(--font-head); font-size: 2.6rem; font-weight: 800; letter-spacing: -.04em; line-height: 1; }
+    .plan-amount .curr { font-size: 1.1rem; vertical-align: super; color: var(--text2); font-weight: 400; }
+    .plan-amount .per { font-size: .8rem; color: var(--text2); font-weight: 300; font-family: var(--font-body); }
+    .plan-desc { font-size: .8rem; color: var(--text2); margin: .7rem 0 1.3rem; line-height: 1.6; }
+    .plan-sep { height: 1px; background: var(--border); margin-bottom: 1.2rem; }
+    .plan-features { list-style: none; padding: 0; margin: 0 0 1.8rem; flex: 1; }
+    .plan-features li {
+      font-size: .82rem; color: var(--text2); padding: .42rem 0;
+      display: flex; align-items: center; gap: .5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .plan-features li:last-child { border-bottom: none; }
+    .plan-features li .fi { font-size: .7rem; flex-shrink: 0; }
+    .fi-check { color: var(--accent3); }
+    .fi-x { color: var(--muted); }
+    .plan-features li.off { opacity: .4; }
+
+    .btn-plan {
+      text-align: center; padding: .68rem 1rem; border-radius: 10px;
+      font-size: .84rem; font-weight: 500; text-decoration: none;
+      transition: .25s var(--ease); display: block;
+      border: 1px solid var(--border2); color: var(--text); font-family: var(--font-body);
+    }
+    .btn-plan:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-plan.main {
+      background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600;
+    }
+    .btn-plan.main:hover { background: #d48a00; border-color: #d48a00; box-shadow: 0 8px 20px rgba(245,158,11,.28); }
+
+    /* ── FOOTER ─────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0;
+      position: relative; z-index: 1;
+    }
+    .footer-brand {
+      font-family: var(--font-head); font-weight: 800;
+      font-size: .9rem; color: var(--text); margin-bottom: .25rem;
+    }
+    .footer-brand .dot { color: var(--accent); }
+    .footer-sub { font-size: .78rem; color: var(--muted); }
+    .footer-copy { font-size: .75rem; color: var(--muted); margin-top: .3rem; }
+
+    /* ── UTILS ──────────────────────────────────────────── */
     .fade-up {
-      opacity:0; transform:translateY(24px);
-      transition:opacity .65s var(--ease), transform .65s var(--ease);
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .6s var(--ease), transform .6s var(--ease);
     }
-    .fade-up.visible { opacity:1; transform:translateY(0); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-    @media(max-width:767px) {
-      .hero-actions { justify-content:center; }
-      .cert-badges { justify-content:center; }
+    @media (max-width: 991px) {
+      .profile-card { display: none; }
+    }
+    @media (max-width: 767px) {
+      .hero-actions { justify-content: flex-start; }
+      .cert-strip   { justify-content: flex-start; }
+      .stat-row     { grid-template-columns: 1fr 1fr 1fr; }
     }
   </style>
 </head>
 <body>
 
+<!-- ── NAVBAR ───────────────────────────────────────────── -->
 <nav class="navbar navbar-expand-lg fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="#hero">Rodrigo Tolosa<span class="dot">.</span></a>
+    <a class="navbar-brand" href="#hero">RT<span class="dot">.</span></a>
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-      <i class="fa-solid fa-bars" style="color:var(--text);font-size:.95rem;"></i>
+      <i class="fa-solid fa-bars" style="color:var(--text2);font-size:.9rem;"></i>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navMenu">
-      <ul class="navbar-nav align-items-center gap-1">
+      <ul class="navbar-nav align-items-lg-center gap-1">
         <li class="nav-item"><a class="nav-link" href="#skills">Stack</a></li>
         <li class="nav-item"><a class="nav-link" href="#experience">Experiencia</a></li>
         <li class="nav-item"><a class="nav-link" href="#education">Educación</a></li>
-        <li class="nav-item ms-2">
+        <li class="nav-item"><a class="nav-link" href="#products">Productos</a></li>
+        <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
           <a href="mailto:tolosarodrigo00@gmail.com" class="nav-link nav-cta">
-            Contacto <i class="fa-solid fa-arrow-up-right ms-1" style="font-size:.75rem;"></i>
+            Contacto <i class="fa-solid fa-arrow-up-right ms-1" style="font-size:.65rem;"></i>
           </a>
         </li>
       </ul>
@@ -339,71 +559,125 @@
   </div>
 </nav>
 
+<!-- ── HERO ─────────────────────────────────────────────── -->
 <section id="hero">
-  <div class="hero-glow-left"></div>
+  <div class="hero-glow hero-glow-a"></div>
+  <div class="hero-glow hero-glow-b"></div>
+
   <div class="container" style="position:relative;z-index:1;">
-    <div class="row align-items-center">
-      <div class="col-lg-8 col-xl-7">
+    <div class="row align-items-center g-5">
 
-        <div class="eyebrow">
+      <!-- Left col -->
+      <div class="col-lg-7 col-xl-7">
+
+        <div class="eyebrow fade-up">
           <span class="eyebrow-line"></span>
-          Senior Python Developer · AWS Engineer
+          Senior Developer · AWS Certified
         </div>
 
-        <h1 class="hero-name">Rodrigo<br>Tolosa</h1>
+        <h1 class="hero-name fade-up" style="transition-delay:.06s">
+          Rodrigo<br><span class="line2">Tolosa</span>
+        </h1>
 
-        <p class="hero-role">
-          Cloud Solutions
-          <span class="pill"><i class="fa-brands fa-aws me-1"></i>AWS Certified</span>
+        <div class="hero-role fade-up" style="transition-delay:.1s">
+          Python Developer
+          <span class="role-sep"></span>
+          Cloud Architect
+          <span class="role-sep"></span>
+          SaaS Builder
+        </div>
+
+        <p class="hero-desc fade-up" style="transition-delay:.14s">
+          Diseño e implemento arquitecturas cloud-native sobre AWS — serverless, escalables y orientadas a resultados. También desarrollo productos SaaS propios para negocios reales.
         </p>
 
-        <p class="hero-desc">
-          Desarrollador con foco en arquitecturas cloud-native sobre AWS. Diseño e implemento aplicaciones Python escalables usando Lambda, DynamoDB, S3 y herramientas de CI/CD. Trabajo en equipos distribuidos globalmente, entregando soluciones de alta disponibilidad y rendimiento.
-        </p>
-
-        <div class="cert-badges">
+        <div class="cert-strip fade-up" style="transition-delay:.18s">
           <span class="cert-badge">
             <i class="fa-solid fa-shield-check"></i>
-            AWS Solutions Architect – Associate &nbsp;·&nbsp; 2024–2027
+            AWS Solutions Architect – Associate
           </span>
           <span class="cert-badge">
             <i class="fa-solid fa-shield-check"></i>
-            AWS Developer – Associate &nbsp;·&nbsp; 2024–2027
+            AWS Developer – Associate
           </span>
         </div>
 
-        <div class="hero-actions">
-          <a href="https://www.linkedin.com/in/rodrigo-n-tolosa/" target="_blank" class="btn-aws">
+        <div class="hero-actions fade-up" style="transition-delay:.22s">
+          <a href="https://www.linkedin.com/in/rodrigo-n-tolosa/" target="_blank" class="btn-primary-rt">
             <i class="fa-brands fa-linkedin-in"></i> LinkedIn
           </a>
-          <a href="https://github.com/tolosarodrigo00" target="_blank" class="btn-outline-rt">
+          <a href="https://github.com/tolosarodrigo00" target="_blank" class="btn-ghost-rt">
             <i class="fa-brands fa-github"></i> GitHub
           </a>
           <a href="mailto:tolosarodrigo00@gmail.com" class="social-link ms-1" title="Email">
             <i class="fa-regular fa-envelope"></i>
           </a>
-          <a href="#" class="social-link" title="CV PDF">
+          <a href="CV TOLOSA RODRIGO.pdf" target="_blank" class="social-link" title="Ver CV en PDF">
             <i class="fa-regular fa-file-pdf"></i>
           </a>
         </div>
 
       </div>
+
+      <!-- Right col — profile card -->
+      <div class="col-lg-5 col-xl-4 offset-xl-1 d-none d-lg-block">
+        <div class="profile-card fade-up" style="transition-delay:.1s">
+          <div class="avatar">RT</div>
+          <p class="profile-name">Rodrigo Tolosa</p>
+          <p class="profile-title">Sr. Python Developer & Cloud Engineer</p>
+
+          <div class="stat-row">
+            <div class="stat-box">
+              <div class="stat-number">12+</div>
+              <div class="stat-label">Años exp.</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number">2</div>
+              <div class="stat-label">AWS Certs</div>
+            </div>
+          </div>
+
+          <p class="profile-location">
+            <i class="fa-solid fa-location-dot"></i>
+            Puerto Madryn, Argentina · Remoto
+          </p>
+
+          <p class="profile-location" style="margin-bottom:1.5rem;">
+            <i class="fa-solid fa-briefcase"></i>
+            DXC Technology · Feb 2022 – Actualidad
+          </p>
+
+          <div class="profile-socials">
+            <a href="https://www.linkedin.com/in/rodrigo-n-tolosa/" target="_blank" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://github.com/tolosarodrigo00" target="_blank" class="social-link"><i class="fa-brands fa-github"></i></a>
+            <a href="mailto:tolosarodrigo00@gmail.com" class="social-link"><i class="fa-regular fa-envelope"></i></a>
+            <a href="CV TOLOSA RODRIGO.pdf" target="_blank" class="social-link" title="CV PDF"><i class="fa-regular fa-file-pdf"></i></a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
+<div class="section-divider"></div>
 
+<!-- ── SKILLS ───────────────────────────────────────────── -->
 <section id="skills">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-4 mb-5 mb-lg-0 fade-up">
-        <div class="s-label">Stack tecnológico</div>
-        <h2 class="s-title">Habilidades</h2>
-        <p class="s-sub">Tecnologías cloud-native, lenguajes y herramientas que uso en proyectos reales de producción.</p>
+    <div class="row g-5 align-items-start">
+
+      <div class="col-lg-4 fade-up">
+        <div class="section-header">
+          <div class="s-label">Stack técnico</div>
+          <h2 class="s-title">Habilidades</h2>
+          <p class="s-sub">Tecnologías cloud-native, lenguajes y herramientas usadas en proyectos reales de producción.</p>
+        </div>
       </div>
-      <div class="col-lg-8 fade-up" style="transition-delay:.12s">
-        <p class="aws-group-title">AWS — Cloud Services</p>
+
+      <div class="col-lg-8 fade-up" style="transition-delay:.1s">
+
+        <p class="skill-group-label">AWS — Cloud Services</p>
         <div class="chips-row">
           <span class="chip"><i class="fa-brands fa-aws"></i> Lambda</span>
           <span class="chip"><i class="fa-brands fa-aws"></i> DynamoDB</span>
@@ -414,7 +688,7 @@
           <span class="chip"><i class="fa-brands fa-aws"></i> IAM</span>
         </div>
 
-        <p class="aws-group-title">Lenguajes & Frameworks</p>
+        <p class="skill-group-label">Lenguajes & Frameworks</p>
         <div class="chips-row">
           <span class="chip blue"><i class="fa-brands fa-python"></i> Python</span>
           <span class="chip blue"><i class="fa-solid fa-database"></i> PL/SQL</span>
@@ -422,15 +696,15 @@
           <span class="chip blue"><i class="fa-brands fa-java"></i> Java</span>
         </div>
 
-        <p class="aws-group-title">Bases de datos</p>
+        <p class="skill-group-label">Bases de datos</p>
         <div class="chips-row">
           <span class="chip"><i class="fa-solid fa-database"></i> PostgreSQL</span>
           <span class="chip"><i class="fa-solid fa-database"></i> MySQL</span>
           <span class="chip"><i class="fa-solid fa-database"></i> Oracle DB</span>
-          <span class="chip"><i class="fa-brands fa-aws"></i> DynamoDB (NoSQL)</span>
+          <span class="chip"><i class="fa-brands fa-aws"></i> DynamoDB</span>
         </div>
 
-        <p class="aws-group-title">DevOps & Herramientas</p>
+        <p class="skill-group-label">DevOps & Herramientas</p>
         <div class="chips-row">
           <span class="chip green"><i class="fa-brands fa-docker"></i> Docker</span>
           <span class="chip green"><i class="fa-brands fa-git-alt"></i> Git</span>
@@ -439,29 +713,35 @@
           <span class="chip green"><i class="fa-solid fa-layer-group"></i> Serverless</span>
           <span class="chip green"><i class="fa-solid fa-arrows-spin"></i> Scrum</span>
         </div>
+
       </div>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
+<div class="section-divider"></div>
 
+<!-- ── EXPERIENCE ────────────────────────────────────────── -->
 <section id="experience">
   <div class="container">
-    <div class="row mb-5 fade-up">
-      <div class="col">
-        <div class="s-label">Trayectoria</div>
-        <h2 class="s-title">Experiencia</h2>
-      </div>
+
+    <div class="section-header fade-up">
+      <div class="s-label">Trayectoria</div>
+      <h2 class="s-title">Experiencia</h2>
     </div>
+
     <div class="row">
       <div class="col-lg-9 col-xl-8">
         <div class="timeline">
 
           <div class="t-card fade-up">
-            <p class="t-company">DXC Technology</p>
-            <p class="t-role">Sr. Python Developer · Cloud Solutions</p>
-            <p class="t-period"><i class="fa-regular fa-calendar me-1"></i>Feb 2022 — Actualidad &nbsp;·&nbsp; Remoto</p>
+            <div class="t-header">
+              <div>
+                <p class="t-company">DXC Technology</p>
+                <p class="t-role">Sr. Python Developer · Cloud Solutions</p>
+              </div>
+              <span class="t-period"><i class="fa-regular fa-calendar"></i> Feb 2022 — Actualidad · Remoto</span>
+            </div>
             <ul class="t-list">
               <li>Diseño, desarrollo y testing de aplicaciones Python robustas y escalables en producción.</li>
               <li>Implementación de arquitecturas serverless con Lambda, DynamoDB y S3.</li>
@@ -475,7 +755,6 @@
               <span class="t-tag">AWS Lambda</span>
               <span class="t-tag">DynamoDB</span>
               <span class="t-tag">S3</span>
-              <span class="t-tag">EC2</span>
               <span class="t-tag">CloudFormation</span>
               <span class="t-tag blue">Docker</span>
               <span class="t-tag blue">CI/CD</span>
@@ -483,10 +762,14 @@
             </div>
           </div>
 
-          <div class="t-card fade-up" style="transition-delay:.1s">
-            <p class="t-company">Health Management Solutions</p>
-            <p class="t-role">Sr. Oracle Developer</p>
-            <p class="t-period"><i class="fa-regular fa-calendar me-1"></i>Abr 2014 — Feb 2022 &nbsp;·&nbsp; Puerto Madryn, Chubut</p>
+          <div class="t-card fade-up" style="transition-delay:.08s">
+            <div class="t-header">
+              <div>
+                <p class="t-company">Health Management Solutions</p>
+                <p class="t-role">Sr. Oracle Developer</p>
+              </div>
+              <span class="t-period"><i class="fa-regular fa-calendar"></i> Abr 2014 — Feb 2022 · Puerto Madryn</span>
+            </div>
             <ul class="t-list">
               <li>Desarrollo de aplicaciones robustas con Oracle Forms y PL/SQL.</li>
               <li>Optimización de bases de datos Oracle mediante estrategias de tuning avanzado.</li>
@@ -507,17 +790,18 @@
   </div>
 </section>
 
-<div class="divider"></div>
+<div class="section-divider"></div>
 
+<!-- ── EDUCATION ─────────────────────────────────────────── -->
 <section id="education">
   <div class="container">
-    <div class="row mb-5 fade-up">
-      <div class="col">
-        <div class="s-label">Formación</div>
-        <h2 class="s-title">Educación & Certificaciones</h2>
-      </div>
+
+    <div class="section-header fade-up">
+      <div class="s-label">Formación</div>
+      <h2 class="s-title">Educación & Certificaciones</h2>
     </div>
-    <div class="edu-row fade-up">
+
+    <div class="edu-grid fade-up" style="transition-delay:.08s">
 
       <div class="edu-card">
         <div class="edu-icon"><i class="fa-solid fa-graduation-cap"></i></div>
@@ -536,20 +820,20 @@
       </div>
 
       <div class="edu-card">
-        <div class="edu-icon aws-icon"><i class="fa-brands fa-aws"></i></div>
+        <div class="edu-icon aws"><i class="fa-brands fa-aws"></i></div>
         <div>
           <p class="edu-title">AWS Certified Solutions Architect – Associate</p>
           <p class="edu-meta">Amazon Web Services</p>
-          <span class="valid-badge"><span class="valid-dot"></span> Vigente 2024–2027</span>
+          <span class="badge-valid"><span class="valid-dot"></span> Vigente 2024–2027</span>
         </div>
       </div>
 
       <div class="edu-card">
-        <div class="edu-icon aws-icon"><i class="fa-brands fa-aws"></i></div>
+        <div class="edu-icon aws"><i class="fa-brands fa-aws"></i></div>
         <div>
           <p class="edu-title">AWS Certified Developer – Associate</p>
           <p class="edu-meta">Amazon Web Services</p>
-          <span class="valid-badge"><span class="valid-dot"></span> Vigente 2024–2027</span>
+          <span class="badge-valid"><span class="valid-dot"></span> Vigente 2024–2027</span>
         </div>
       </div>
 
@@ -565,16 +849,193 @@
   </div>
 </section>
 
+<div class="section-divider"></div>
+
+<!-- ── PRODUCTS ──────────────────────────────────────────── -->
+<section id="products">
+  <div class="container" style="position:relative;z-index:1;">
+
+    <!-- Section label -->
+    <div class="section-header fade-up" style="margin-bottom:1rem;">
+      <div class="s-label">Mis productos SaaS</div>
+    </div>
+
+    <!-- Product intro row -->
+    <div class="row g-5 align-items-center mb-5">
+      <div class="col-lg-6 fade-up" style="transition-delay:.05s">
+        <div class="product-eyebrow">
+          <span class="live-dot"></span> Disponible ahora
+        </div>
+        <h2 class="product-headline">Reservas<span class="accent">PRO</span></h2>
+        <p class="product-sub">
+          Sistema de reservas online para negocios de cualquier rubro. Gestioná turnos, clientes y disponibilidad desde un panel moderno — sin complicaciones, sin papel.
+        </p>
+        <div class="d-flex gap-3 flex-wrap">
+          <a href="mailto:tolosarodrigo00@gmail.com?subject=ReservasPRO%20-%20Quiero%20una%20demo" class="btn-primary-rt">
+            <i class="fa-solid fa-calendar-check"></i> Solicitar demo
+          </a>
+          <a href="mailto:tolosarodrigo00@gmail.com?subject=ReservasPRO%20-%20Consulta" class="btn-ghost-rt">
+            <i class="fa-regular fa-envelope"></i> Consultar
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-6 fade-up" style="transition-delay:.1s">
+        <!-- mini mockup stats -->
+        <div style="background:var(--bg);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:1.8rem;">
+          <div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin-bottom:1rem;">Vista rápida del dashboard</div>
+          <div class="row g-3">
+            <div class="col-6">
+              <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem;">
+                <div style="font-family:var(--font-head);font-size:1.8rem;font-weight:800;color:var(--accent);letter-spacing:-.04em;">128</div>
+                <div style="font-size:.72rem;color:var(--muted);">Reservas este mes</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem;">
+                <div style="font-family:var(--font-head);font-size:1.8rem;font-weight:800;color:var(--accent3);letter-spacing:-.04em;">98%</div>
+                <div style="font-size:.72rem;color:var(--muted);">Tasa de confirmación</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem;">
+                <div style="font-family:var(--font-head);font-size:1.8rem;font-weight:800;color:var(--accent2);letter-spacing:-.04em;">24/7</div>
+                <div style="font-size:.72rem;color:var(--muted);">Disponibilidad online</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem;">
+                <div style="font-family:var(--font-head);font-size:1.8rem;font-weight:800;color:var(--text);letter-spacing:-.04em;">0h</div>
+                <div style="font-size:.72rem;color:var(--muted);">Gestión manual</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <div class="feature-grid fade-up" style="transition-delay:.12s; margin-bottom:4rem;">
+
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fa-solid fa-calendar-days"></i></div>
+        <p class="feature-title">Reservas online 24/7</p>
+        <p class="feature-text">Tus clientes reservan desde cualquier dispositivo, cuando quieran.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon blue"><i class="fa-solid fa-gauge-high"></i></div>
+        <p class="feature-title">Panel en tiempo real</p>
+        <p class="feature-text">Agenda, horarios y gestión de reservas desde un dashboard intuitivo.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon green"><i class="fa-solid fa-bell"></i></div>
+        <p class="feature-title">Notificaciones automáticas</p>
+        <p class="feature-text">Recordatorios por email para reducir ausencias sin esfuerzo.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fa-solid fa-users"></i></div>
+        <p class="feature-title">Gestión de clientes</p>
+        <p class="feature-text">Historial completo de reservas, notas y seguimiento por cliente.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon blue"><i class="fa-solid fa-chart-line"></i></div>
+        <p class="feature-title">Reportes y estadísticas</p>
+        <p class="feature-text">Analizá ocupación, picos de demanda y rendimiento del negocio.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon green"><i class="fa-solid fa-plug"></i></div>
+        <p class="feature-title">API RESTful incluida</p>
+        <p class="feature-text">Integrá con tus sistemas actuales o tu sitio web fácilmente.</p>
+      </div>
+
+    </div>
+
+    <!-- Pricing -->
+    <div class="fade-up" style="transition-delay:.15s;">
+      <div class="s-label" style="margin-bottom:.5rem;">Planes</div>
+      <h3 class="s-title" style="font-size:clamp(1.4rem,3vw,1.9rem);margin-bottom:1.8rem;">Elegí el plan para tu negocio</h3>
+    </div>
+
+    <div class="pricing-grid fade-up" style="transition-delay:.2s;">
+
+      <!-- Starter -->
+      <div class="price-card">
+        <p class="plan-tier">Starter</p>
+        <p class="plan-amount"><span class="curr">$</span>0 <span class="per">/ mes</span></p>
+        <p class="plan-desc">Para probar sin compromisos. Ideal para empezar.</p>
+        <div class="plan-sep"></div>
+        <ul class="plan-features">
+          <li><i class="fa-solid fa-check fi fi-check"></i> Hasta 50 reservas / mes</li>
+          <li><i class="fa-solid fa-check fi fi-check"></i> 1 usuario administrador</li>
+          <li><i class="fa-solid fa-check fi fi-check"></i> Panel de gestión básico</li>
+          <li><i class="fa-solid fa-check fi fi-check"></i> Notificaciones por email</li>
+          <li class="off"><i class="fa-solid fa-xmark fi fi-x"></i> Reportes avanzados</li>
+          <li class="off"><i class="fa-solid fa-xmark fi fi-x"></i> API RESTful</li>
+          <li class="off"><i class="fa-solid fa-xmark fi fi-x"></i> Soporte prioritario</li>
+        </ul>
+        <a href="mailto:tolosarodrigo00@gmail.com?subject=ReservasPRO%20Starter" class="btn-plan">Empezar gratis</a>
+      </div>
+
+      <!-- Pro -->
+      <div class="price-card featured">
+        <span class="popular-badge">Más popular</span>
+        <p class="plan-tier">Pro</p>
+        <p class="plan-amount"><span class="curr">$</span>29 <span class="per">/ mes</span></p>
+        <p class="plan-desc">Para negocios en crecimiento. Todo lo que necesitás.</p>
+        <div class="plan-sep"></div>
+        <ul class="plan-features">
+          <li><i class="fa-solid fa-check fi fi-check"></i> Reservas ilimitadas</li>
+          <li><i class="fa-solid fa-check fi fi-check"></i> Hasta 5 usuarios</li>
+          <li><i class="fa-solid fa-check fi fi-check"></i> Panel avanzado + calendario</li>
+          <li><i class="fa-solid fa-check fi fi-check"></i> Notificaciones automáticas</li>
+          <li><i class="fa-solid fa-check fi fi-check"></i> Reportes y estadísticas</li>
+          <li><i class="fa-solid fa-check fi fi-check"></i> API RESTful</li>
+          <li class="off"><i class="fa-solid fa-xmark fi fi-x"></i> Soporte dedicado</li>
+        </ul>
+        <a href="mailto:tolosarodrigo00@gmail.com?subject=ReservasPRO%20Pro" class="btn-plan main">Comenzar ahora</a>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="price-card">
+        <p class="plan-tier">Enterprise</p>
+        <p class="plan-amount" style="font-size:1.9rem;line-height:1.2;">A medida</p>
+        <p class="plan-desc">Solución personalizada para tu empresa o cadena de negocios.</p>
+        <div class="plan-sep"></div>
+        <ul class="plan-features">
+          <li><i class="fa-solid fa-check fi fi-check"></i> Todo lo del plan Pro</li>
+          <li><i class="fa-solid fa-check fi fi-check"></i> Usuarios ilimitados</li>
+          <li><i class="fa-solid fa-check fi fi-check"></i> White-label / marca propia</li>
+          <li><i class="fa-solid fa-check fi fi-check"></i> Integraciones personalizadas</li>
+          <li><i class="fa-solid fa-check fi fi-check"></i> SLA garantizado</li>
+          <li><i class="fa-solid fa-check fi fi-check"></i> Soporte dedicado 24/7</li>
+          <li><i class="fa-solid fa-check fi fi-check"></i> Onboarding asistido</li>
+        </ul>
+        <a href="mailto:tolosarodrigo00@gmail.com?subject=ReservasPRO%20Enterprise" class="btn-plan">Contactar</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ────────────────────────────────────────────── -->
 <footer>
   <div class="container">
-    <div class="row align-items-center">
-      <div class="col-md-6 mb-3 mb-md-0">
-        <p class="footer-copy">© 2025 Rodrigo Tolosa · tolosarodrigo00@gmail.com · Puerto Madryn, Argentina</p>
+    <div class="row align-items-center g-3">
+      <div class="col-md-6">
+        <p class="footer-brand">Rodrigo Tolosa<span class="dot">.</span></p>
+        <p class="footer-sub">Sr. Python Developer · AWS Certified · SaaS Builder</p>
+        <p class="footer-copy">© 2026 · Puerto Madryn, Argentina · tolosarodrigo00@gmail.com</p>
       </div>
-      <div class="col-md-6 d-flex justify-content-md-end gap-2">
+      <div class="col-md-6 d-flex justify-content-md-end gap-2 flex-wrap">
         <a href="https://www.linkedin.com/in/rodrigo-n-tolosa/" target="_blank" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
         <a href="https://github.com/tolosarodrigo00" target="_blank" class="social-link"><i class="fa-brands fa-github"></i></a>
         <a href="mailto:tolosarodrigo00@gmail.com" class="social-link"><i class="fa-regular fa-envelope"></i></a>
+        <a href="CV TOLOSA RODRIGO.pdf" target="_blank" class="social-link" title="CV PDF"><i class="fa-regular fa-file-pdf"></i></a>
       </div>
     </div>
   </div>
@@ -583,17 +1044,22 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
-  }, { threshold: 0.1 });
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
   document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
   const sections = document.querySelectorAll('section[id]');
-  const links = document.querySelectorAll('.nav-link:not(.nav-cta)');
+  const navLinks = document.querySelectorAll('.nav-link:not(.nav-cta)');
   window.addEventListener('scroll', () => {
-    let cur = '';
-    sections.forEach(s => { if(window.scrollY >= s.offsetTop - 130) cur = s.id; });
-    links.forEach(l => { l.style.color = l.getAttribute('href') === '#' + cur ? 'var(--text)' : ''; });
-  });
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+    navLinks.forEach(l => {
+      const isActive = l.getAttribute('href') === '#' + current;
+      l.style.color = isActive ? 'var(--text)' : '';
+    });
+  }, { passive: true });
 </script>
 </body>
 </html>
